@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VÉRITÉ — Sports Lounge Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#C8A96B;
+  --gold-light:#E2C990;
+  --gold-dim:#8A6F3E;
+  --black:#0B0B0B;
+  --dark:#111111;
+  --surface:#1A1A1A;
+  --surface2:#222222;
+  --white:#F5F5F5;
+  --white-dim:#AAAAAA;
+  --border:rgba(200,169,107,0.2);
+  --border-hover:rgba(200,169,107,0.5);
+}
+html{scroll-behavior:smooth;background:#0B0B0B;}
+body{font-family:'Montserrat',sans-serif;background:#0B0B0B;color:#F5F5F5;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 60px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(11,11,11,0.97),rgba(11,11,11,0.4));backdrop-filter:blur(4px);}
+.nav-logo{font-family:'Cinzel',serif;font-size:22px;font-weight:600;letter-spacing:6px;color:var(--gold);cursor:pointer;}
+.nav-logo span{color:#F5F5F5;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(245,245,245,0.7);text-decoration:none;transition:color 0.3s;cursor:pointer;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 24px;cursor:pointer;transition:all 0.3s;font-family:'Montserrat',sans-serif;}
+.nav-cta:hover{background:var(--gold);color:#0B0B0B;}
+.menu-btn{display:none;background:none;border:none;cursor:pointer;color:var(--gold);font-size:24px;}
+
+/* MOBILE MENU */
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(11,11,11,0.99);z-index:500;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:32px;color:#F5F5F5;text-decoration:none;letter-spacing:2px;cursor:pointer;}
+.mobile-close{position:absolute;top:24px;right:24px;background:none;border:none;color:var(--gold);font-size:28px;cursor:pointer;}
+
+/* HERO — CORRIGIDO: tamanho do título e CTA visível */
+#hero{position:relative;height:100vh;min-height:600px;overflow:hidden;}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.5s ease;background-size:cover;background-position:center;}
+.hero-slide.active{opacity:1;}
+/* Imagens temáticas: sinuca, poker lounge, sports bar premium */
+.slide1{background-image:url('https://images.unsplash.com/photo-1611251135345-18c56206b863?w=1920&q=80');}
+.slide2{background-image:url('https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=1920&q=80');}
+.slide3{background-image:url('https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=1920&q=80');}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(11,11,11,0.88) 0%,rgba(11,11,11,0.55) 60%,rgba(11,11,11,0.72) 100%);}
+.hero-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 10%;max-width:860px;}
+.hero-label{font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:16px;}
+.hero-label::before{content:'';width:40px;height:1px;background:var(--gold);}
+/* CORREÇÃO CRÍTICA #4 — título menor, hierarquia correta */
+h1.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5.2vw,72px);font-weight:600;line-height:1.08;letter-spacing:-0.5px;margin-bottom:20px;}
+h1.hero-title em{font-style:italic;color:var(--gold);}
+.hero-sub{font-size:13px;font-weight:300;letter-spacing:1.5px;color:rgba(245,245,245,0.7);max-width:400px;line-height:1.9;margin-bottom:36px;}
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+.btn-primary{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;background:var(--gold);color:#0B0B0B;padding:14px 36px;cursor:pointer;border:none;transition:all 0.3s;}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-1px);}
+.btn-ghost{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;background:transparent;color:rgba(245,245,245,0.8);padding:14px 36px;cursor:pointer;border:1px solid rgba(245,245,245,0.25);transition:all 0.3s;}
+.btn-ghost:hover{border-color:rgba(245,245,245,0.6);color:#F5F5F5;}
+.hero-indicators{position:absolute;bottom:36px;left:10%;display:flex;gap:10px;}
+.indicator{width:28px;height:2px;background:rgba(245,245,245,0.25);cursor:pointer;transition:all 0.3s;}
+.indicator.active{background:var(--gold);width:56px;}
+.hero-scroll{position:absolute;bottom:36px;right:60px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;}
+.hero-scroll span{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,245,245,0.4);writing-mode:vertical-rl;}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,transparent,var(--gold));animation:scrollPulse 2s ease-in-out infinite;}
+@keyframes scrollPulse{0%,100%{opacity:0.4;}50%{opacity:1;}}
+
+/* SECTION BASE */
+section{padding:100px 10%;}
+.section-label{font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:16px;}
+.section-label::before{content:'';width:30px;height:1px;background:var(--gold);}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.8vw,54px);font-weight:600;line-height:1.1;margin-bottom:16px;}
+.section-title em{font-style:italic;color:var(--gold);}
+
+/* BRAND PILLARS */
+#brand{padding:80px 10%;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;}
+.brand-pillar{padding:48px 40px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:16px;}
+.brand-pillar:last-child{border-right:none;}
+.brand-number{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--gold);opacity:0.5;line-height:1;}
+.brand-pillar h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;}
+.brand-pillar p{font-size:13px;color:rgba(245,245,245,0.6);line-height:1.8;font-weight:300;}
+
+/* CATEGORIES */
+#categories{background:#0B0B0B;}
+.categories-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;}
+.categories-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.cat-card{position:relative;height:480px;overflow:hidden;cursor:pointer;}
+.cat-card:first-child{height:560px;}
+.cat-img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s ease;}
+.cat-card:hover .cat-img{transform:scale(1.05);}
+.cat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,11,0.95) 0%,rgba(11,11,11,0.3) 60%,transparent 100%);transition:opacity 0.4s;}
+.cat-card:hover .cat-overlay{opacity:0.85;}
+.cat-content{position:absolute;bottom:0;left:0;right:0;padding:32px 28px;transform:translateY(8px);transition:transform 0.4s ease;}
+.cat-card:hover .cat-content{transform:translateY(0);}
+.cat-tag{font-size:9px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.cat-name{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;margin-bottom:8px;}
+.cat-desc{font-size:12px;color:rgba(245,245,245,0.65);line-height:1.7;margin-bottom:20px;font-weight:300;max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
+.cat-card:hover .cat-desc{max-height:60px;}
+.cat-btn{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);background:none;border:none;cursor:pointer;padding:0;font-family:'Montserrat',sans-serif;}
+
+/* PRODUCTS */
+#products{background:var(--dark);}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.product-card{background:var(--surface);border:1px solid var(--border);overflow:hidden;transition:border-color 0.3s,transform 0.3s;cursor:pointer;}
+.product-card:hover{border-color:var(--border-hover);transform:translateY(-4px);}
+.product-img-wrap{position:relative;height:280px;overflow:hidden;}
+.product-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;}
+.product-card:hover .product-img-wrap img{transform:scale(1.06);}
+.product-badge{position:absolute;top:16px;left:16px;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;background:var(--gold);color:#0B0B0B;padding:5px 12px;}
+.product-info{padding:24px 24px 28px;}
+.product-cat{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.product-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;margin-bottom:6px;}
+.product-size{font-size:12px;color:rgba(245,245,245,0.5);margin-bottom:20px;}
+.product-footer{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--border);}
+.product-price{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);}
+.product-price span{font-size:13px;color:rgba(245,245,245,0.4);font-family:'Montserrat',sans-serif;}
+.product-explore{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;background:none;border:1px solid var(--border);color:rgba(245,245,245,0.7);padding:10px 18px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all 0.3s;}
+.product-explore:hover{border-color:var(--gold);color:var(--gold);}
+
+/* LIFESTYLE */
+#lifestyle{background:var(--surface);border-top:1px solid var(--border);}
+.lifestyle-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:64px;}
+.lifestyle-img-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:240px 240px;gap:8px;}
+.lifestyle-img{width:100%;height:100%;object-fit:cover;}
+.lifestyle-img.tall{grid-row:1/3;height:100%;}
+.lifestyle-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.2vw,48px);font-weight:600;line-height:1.15;margin-bottom:24px;}
+.lifestyle-text h2 em{font-style:italic;color:var(--gold);}
+.lifestyle-text p{font-size:14px;color:rgba(245,245,245,0.65);line-height:1.9;margin-bottom:20px;font-weight:300;}
+.lifestyle-stats{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px;padding-top:40px;border-top:1px solid var(--border);}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:46px;color:var(--gold);line-height:1;}
+.stat-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,245,245,0.5);margin-top:6px;}
+
+/* FOOTER */
+footer{background:var(--dark);border-top:1px solid var(--border);padding:60px 10% 40px;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid var(--border);}
+.footer-brand .nav-logo{display:block;margin-bottom:20px;cursor:default;}
+.footer-brand p{font-size:13px;color:rgba(245,245,245,0.5);line-height:1.8;max-width:260px;}
+.footer-col h4{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.footer-col ul li a{font-size:13px;color:rgba(245,245,245,0.5);text-decoration:none;transition:color 0.3s;cursor:pointer;}
+.footer-col ul li a:hover{color:var(--gold);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;}
+.footer-bottom p{font-size:12px;color:rgba(245,245,245,0.3);}
+
+/* ============================================================
+   CATEGORY PAGE — CORREÇÃO CRÍTICA #3
+   ============================================================ */
+.cat-page{display:none;position:fixed;inset:0;z-index:200;background:#0B0B0B;overflow-y:auto;}
+.cat-page.open{display:block;}
+.page-back{position:fixed;top:28px;left:60px;z-index:310;display:flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,245,245,0.65);background:rgba(11,11,11,0.7);border:none;cursor:pointer;font-family:'Montserrat',sans-serif;transition:color 0.3s;padding:8px 16px;backdrop-filter:blur(4px);}
+.page-back:hover{color:var(--gold);}
+
+/* Cat Hero */
+.cat-hero{height:72vh;min-height:500px;position:relative;overflow:hidden;}
+.cat-hero img{width:100%;height:100%;object-fit:cover;}
+.cat-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,11,11,0.35) 0%,rgba(11,11,11,0.92) 100%);}
+.cat-hero-content{position:absolute;bottom:64px;left:10%;right:10%;}
+.cat-hero-tag{font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:16px;}
+.cat-hero-tag::before{content:'';width:30px;height:1px;background:var(--gold);}
+.cat-hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,7vw,96px);font-weight:600;line-height:1.02;}
+.cat-hero-title em{font-style:italic;color:var(--gold);}
+.cat-hero-sub{font-size:14px;color:rgba(245,245,245,0.65);max-width:500px;line-height:1.85;margin-top:18px;font-weight:300;}
+
+/* Cat Identity Block */
+.cat-identity{padding:56px 10%;background:var(--surface);border-bottom:1px solid var(--border);}
+.cat-identity-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;}
+.cat-identity-item{padding:32px 36px;border-right:1px solid var(--border);}
+.cat-identity-item:last-child{border-right:none;}
+.cat-identity-icon{font-size:28px;margin-bottom:12px;}
+.cat-identity-label{font-size:9px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.cat-identity-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:6px;}
+.cat-identity-desc{font-size:12px;color:rgba(245,245,245,0.55);line-height:1.75;font-weight:300;}
+
+/* Cat Products */
+.cat-products{padding:80px 10%;background:#0B0B0B;}
+.cat-products-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;}
+.cat-products-title{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;}
+.cat-products-sub{font-size:12px;color:rgba(245,245,245,0.4);letter-spacing:2px;text-transform:uppercase;margin-top:4px;}
+.cat-products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+
+/* Cat Carrossel de Imagens */
+.cat-gallery{padding:0 10% 80px;background:#0B0B0B;}
+.cat-gallery-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;margin-bottom:4px;}
+.cat-gallery-sub{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,245,245,0.4);margin-bottom:32px;}
+.cat-gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:260px 260px;gap:6px;}
+.cat-gallery-img{width:100%;height:100%;object-fit:cover;}
+.cat-gallery-img.main{grid-row:1/3;}
+
+/* ============================================================
+   PRODUCT DETAIL PAGE — CORREÇÃO CRÍTICA #2
+   ============================================================ */
+.detail-page{display:none;position:fixed;inset:0;z-index:300;background:#0B0B0B;overflow-y:auto;}
+.detail-page.open{display:block;}
+
+/* Detail Nav */
+.detail-nav{position:sticky;top:0;z-index:10;background:rgba(11,11,11,0.97);border-bottom:1px solid var(--border);padding:16px 10%;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(8px);}
+.detail-breadcrumb{font-size:11px;color:rgba(245,245,245,0.4);letter-spacing:1px;display:flex;align-items:center;gap:8px;}
+.detail-breadcrumb span{color:var(--gold);}
+.detail-breadcrumb-sep{opacity:0.4;}
+.detail-back-btn{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;background:none;border:none;color:rgba(245,245,245,0.6);cursor:pointer;font-family:'Montserrat',sans-serif;transition:color 0.3s;display:flex;align-items:center;gap:8px;}
+.detail-back-btn:hover{color:var(--gold);}
+
+/* Detail Layout */
+.detail-content{padding:60px 10% 80px;display:grid;grid-template-columns:52% 1fr;gap:64px;align-items:start;}
+
+/* Gallery */
+.detail-gallery{position:sticky;top:80px;}
+.detail-main-img{width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--border);margin-bottom:10px;cursor:zoom-in;}
+.detail-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.detail-thumb{width:100%;aspect-ratio:1;object-fit:cover;border:1px solid var(--border);cursor:pointer;transition:border-color 0.3s,opacity 0.3s;opacity:0.55;}
+.detail-thumb:hover,.detail-thumb.active{border-color:var(--gold);opacity:1;}
+
+/* Detail Info */
+.detail-info{padding-top:8px;}
+.detail-badge-row{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.detail-badge{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;padding:5px 12px;border:1px solid var(--border);}
+.detail-badge.cat{color:var(--gold);border-color:var(--gold-dim);}
+.detail-badge.tag{color:rgba(245,245,245,0.5);}
+.detail-title{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:600;line-height:1.04;margin-bottom:10px;}
+.detail-tagline{font-size:13px;color:var(--gold);letter-spacing:2px;margin-bottom:20px;font-weight:300;}
+.detail-desc{font-size:14px;color:rgba(245,245,245,0.65);line-height:1.9;margin-bottom:0;font-weight:300;}
+.detail-divider{height:1px;background:var(--border);margin:28px 0;}
+
+/* Positioning block — texto curto de posicionamento estratégico */
+.detail-positioning{background:var(--surface);border-left:2px solid var(--gold);padding:20px 24px;margin-bottom:0;}
+.detail-positioning p{font-size:13px;color:rgba(245,245,245,0.7);line-height:1.85;font-weight:300;font-style:italic;}
+
+/* Prices */
+.price-block{display:flex;gap:24px;margin-bottom:28px;}
+.price-item{flex:1;padding:18px 20px;border:1px solid var(--border);}
+.price-type{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(245,245,245,0.4);margin-bottom:6px;}
+.price-value{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold);}
+.price-note{font-size:11px;color:rgba(245,245,245,0.35);margin-top:4px;}
+
+/* Actions */
+.detail-actions{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.btn-full{width:100%;padding:15px;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;font-family:'Montserrat',sans-serif;cursor:pointer;transition:all 0.3s;border:none;}
+.btn-buy{background:var(--gold);color:#0B0B0B;}
+.btn-buy:hover{background:var(--gold-light);}
+.btn-rent{background:transparent;color:var(--gold);border:1px solid var(--gold)!important;}
+.btn-rent:hover{background:rgba(200,169,107,0.08);}
+.btn-contact{background:transparent;color:rgba(245,245,245,0.65);border:1px solid rgba(245,245,245,0.2)!important;}
+.btn-contact:hover{border-color:rgba(245,245,245,0.45)!important;color:#F5F5F5;}
+
+/* Specs */
+.specs-label{font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.specs-label::before{content:'';width:20px;height:1px;background:var(--gold);}
+.specs-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.spec-item{padding:11px 14px;background:var(--surface);border:1px solid var(--border);}
+.spec-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,245,245,0.35);margin-bottom:3px;}
+.spec-value{font-size:13px;font-weight:500;}
+
+/* Related */
+.related-section{padding:60px 10% 80px;background:var(--dark);border-top:1px solid var(--border);}
+.related-header{margin-bottom:36px;}
+.related-header h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;margin-bottom:4px;}
+.related-header p{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,245,245,0.4);}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+
+/* =============== RESPONSIVE =============== */
+@media(max-width:1200px){
+.categories-grid{grid-template-columns:repeat(2,1fr);}
+.cat-card:first-child{height:480px;}
+.products-grid{grid-template-columns:repeat(2,1fr);}
+.related-grid{grid-template-columns:repeat(2,1fr);}
+.cat-products-grid{grid-template-columns:repeat(2,1fr);}
+.footer-top{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:900px){
+nav{padding:16px 24px;}
+.nav-links,.nav-cta{display:none;}
+.menu-btn{display:block;}
+section{padding:64px 6%;}
+#brand{grid-template-columns:1fr;padding:0;}
+.brand-pillar{border-right:none;border-bottom:1px solid var(--border);padding:32px 24px;}
+.brand-pillar:last-child{border-bottom:none;}
+.categories-grid{grid-template-columns:1fr;}
+.cat-card,.cat-card:first-child{height:320px;}
+.categories-header{flex-direction:column;align-items:flex-start;gap:16px;}
+.products-grid,.related-grid,.cat-products-grid{grid-template-columns:1fr;}
+.detail-content{grid-template-columns:1fr;gap:40px;}
+.detail-gallery{position:static;}
+.lifestyle-grid{grid-template-columns:1fr;}
+.lifestyle-img-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px;}
+.lifestyle-img.tall{grid-row:1;}
+.footer-top{grid-template-columns:1fr;}
+.footer-bottom{flex-direction:column;gap:12px;text-align:center;}
+.page-back{left:16px;top:16px;}
+.cat-hero-content{left:6%;right:6%;bottom:48px;}
+.cat-products{padding:60px 6%;}
+.cat-gallery{padding:0 6% 60px;}
+.detail-content{padding:48px 6% 60px;}
+.related-section{padding:48px 6% 60px;}
+.price-block{flex-direction:column;gap:8px;}
+.specs-grid{grid-template-columns:1fr;}
+.cat-identity-grid{grid-template-columns:1fr;}
+.cat-identity-item{border-right:none;border-bottom:1px solid var(--border);}
+.cat-identity-item:last-child{border-bottom:none;}
+.cat-gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px;}
+.cat-gallery-img.main{grid-row:1;grid-column:1/3;}
+.detail-thumbs{grid-template-columns:repeat(4,1fr);}
+.detail-nav{padding:14px 6%;}
+}
+@media(max-width:480px){
+.hero-actions{flex-direction:column;align-items:flex-start;}
+.btn-primary,.btn-ghost{width:100%;text-align:center;}
+.detail-thumbs{grid-template-columns:repeat(3,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a onclick="scrollToSection('categories');toggleMenu()">Categorias</a>
+  <a onclick="scrollToSection('products');toggleMenu()">Coleções</a>
+  <a onclick="scrollToSection('lifestyle');toggleMenu()">Sobre</a>
+  <a onclick="scrollToSection('footer');toggleMenu()">Contato</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo" onclick="goHome()">VÉRITÉ<span> LOUNGE</span></div>
+  <ul class="nav-links">
+    <li><a onclick="scrollToSection('categories')">Categorias</a></li>
+    <li><a onclick="scrollToSection('products')">Coleções</a></li>
+    <li><a onclick="scrollToSection('lifestyle')">Sobre</a></li>
+    <li><a onclick="scrollToSection('footer')">Contato</a></li>
+  </ul>
+  <button class="nav-cta" onclick="scrollToSection('categories')">Solicitar Orçamento</button>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero">
+  <div class="hero-slide slide1 active"></div>
+  <div class="hero-slide slide2"></div>
+  <div class="hero-slide slide3"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-label">Sports Lounge Premium</div>
+    <h1 class="hero-title">Mesas que transformam<br>espaços em <em>experiências</em><br>inesquecíveis.</h1>
+    <p class="hero-sub">Sinuca, poker, ping pong e totó de alto padrão para quem entende que cada detalhe define a experiência.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="scrollToSection('categories')">Explorar Coleção</button>
+      <button class="btn-ghost" onclick="scrollToSection('lifestyle')">Nossa História</button>
+    </div>
+  </div>
+  <div class="hero-indicators">
+    <div class="indicator active" onclick="goToSlide(0)"></div>
+    <div class="indicator" onclick="goToSlide(1)"></div>
+    <div class="indicator" onclick="goToSlide(2)"></div>
+  </div>
+  <div class="hero-scroll" onclick="scrollToSection('brand')">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- BRAND PILLARS -->
+<div id="brand">
+  <div class="brand-pillar">
+    <div class="brand-number">01</div>
+    <h3>Venda Premium</h3>
+    <p>Mesas de alto padrão fabricadas para durar décadas. Cada peça é uma declaração de estilo e qualidade permanente para o seu espaço.</p>
+  </div>
+  <div class="brand-pillar">
+    <div class="brand-number">02</div>
+    <h3>Locação de Elite</h3>
+    <p>Equipe eventos, bares e espaços corporativos com mesas premium sob locação flexível. Sofisticação sob demanda, sem compromisso de longo prazo.</p>
+  </div>
+  <div class="brand-pillar">
+    <div class="brand-number">03</div>
+    <h3>Experiências Completas</h3>
+    <p>Do espaço ao entretenimento, criamos ambientes onde pessoas se conectam, consomem e retornam. Resultados reais para o seu negócio.</p>
+  </div>
+</div>
+
+<!-- ==================== CATEGORIES ==================== -->
+<section id="categories">
+  <div class="categories-header">
+    <div>
+      <div class="section-label">Nossas Categorias</div>
+      <h2 class="section-title">Cada jogo,<br>uma <em>identidade</em> própria.</h2>
+    </div>
+    <button class="btn-ghost" onclick="scrollToSection('products')">Ver Todas as Coleções</button>
+  </div>
+  <div class="categories-grid">
+    <div class="cat-card" onclick="openCatPage('sinuca')">
+      <!-- Sinuca: mesa de bilhar profissional -->
+      <img src="https://images.unsplash.com/photo-1611251135345-18c56206b863?w=900&q=85" class="cat-img" alt="Sinuca Premium">
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <div class="cat-tag">Elegância · Tradição · Precisão</div>
+        <div class="cat-name">Sinuca</div>
+        <div class="cat-desc">Mesas de sinuca profissionais em ardósia e madeira nobre para espaços que exigem o melhor.</div>
+        <button class="cat-btn">Explorar →</button>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openCatPage('poker')">
+      <!-- Poker: mesa de poker premium -->
+      <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=900&q=85" class="cat-img" alt="Poker Premium">
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <div class="cat-tag">Estratégia · Exclusividade · Networking</div>
+        <div class="cat-name">Poker</div>
+        <div class="cat-desc">Mesas de poker com feltro de competição e estrutura em madeira nobre para noites memoráveis.</div>
+        <button class="cat-btn">Explorar →</button>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openCatPage('pingpong')">
+      <!-- Ping Pong: mesa tênis de mesa profissional -->
+      <img src="https://images.unsplash.com/photo-1534158914592-062992fbe900?w=900&q=85" class="cat-img" alt="Ping Pong Premium">
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <div class="cat-tag">Movimento · Energia · Interação</div>
+        <div class="cat-name">Ping Pong</div>
+        <div class="cat-desc">Mesas de tênis de mesa de alto desempenho com acabamento homologado e design sofisticado.</div>
+        <button class="cat-btn">Explorar →</button>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openCatPage('toto')">
+      <!-- Totó: mesa de pebolim premium -->
+      <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=900&q=85" class="cat-img" alt="Totó Premium">
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <div class="cat-tag">Diversão · Premium · Conexão</div>
+        <div class="cat-name">Totó</div>
+        <div class="cat-desc">Totós de design contemporâneo que elevam qualquer espaço de lazer a outro patamar.</div>
+        <button class="cat-btn">Explorar →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PRODUCTS ==================== -->
+<section id="products" style="background:var(--dark);">
+  <div class="section-label">Coleção em Destaque</div>
+  <h2 class="section-title">Peças que <em>definem</em><br>a excelência.</h2>
+  <div class="products-grid">
+    <div class="product-card" onclick="openProduct('imperial')">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1611251135345-18c56206b863?w=700&q=80" alt="Mesa Imperial — Sinuca">
+        <div class="product-badge">Destaque</div>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Sinuca</div>
+        <div class="product-name">Mesa Imperial</div>
+        <div class="product-size">2,74m × 1,37m — Padrão Profissional</div>
+        <div class="product-footer">
+          <div class="product-price">R$ 18.900 <span>/ compra</span></div>
+          <button class="product-explore" onclick="event.stopPropagation();openProduct('imperial')">Ver Modelo</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" onclick="openProduct('prestige')">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=700&q=80" alt="Mesa Prestige — Poker">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Poker</div>
+        <div class="product-name">Mesa Prestige</div>
+        <div class="product-size">2,40m × 1,20m — Oval Premium</div>
+        <div class="product-footer">
+          <div class="product-price">R$ 12.500 <span>/ compra</span></div>
+          <button class="product-explore" onclick="event.stopPropagation();openProduct('prestige')">Ver Modelo</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" onclick="openProduct('noir')">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1534158914592-062992fbe900?w=700&q=80" alt="Mesa Noir — Ping Pong">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Ping Pong</div>
+        <div class="product-name">Mesa Noir</div>
+        <div class="product-size">2,74m × 1,52m — ITTF Standard</div>
+        <div class="product-footer">
+          <div class="product-price">R$ 7.800 <span>/ compra</span></div>
+          <button class="product-explore" onclick="event.stopPropagation();openProduct('noir')">Ver Modelo</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" onclick="openProduct('legacy')">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=700&q=80" alt="Mesa Legacy — Totó">
+        <div class="product-badge">Novo</div>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Totó</div>
+        <div class="product-name">Mesa Legacy</div>
+        <div class="product-size">1,40m × 0,74m — Design Contemporâneo</div>
+        <div class="product-footer">
+          <div class="product-price">R$ 6.200 <span>/ compra</span></div>
+          <button class="product-explore" onclick="event.stopPropagation();openProduct('legacy')">Ver Modelo</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" onclick="openProduct('royalclub')">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=700&q=80" alt="Mesa Royal Club — Sinuca">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Sinuca</div>
+        <div class="product-name">Mesa Royal Club</div>
+        <div class="product-size">3,00m × 1,50m — Grand Format</div>
+        <div class="product-footer">
+          <div class="product-price">R$ 28.500 <span>/ compra</span></div>
+          <button class="product-explore" onclick="event.stopPropagation();openProduct('royalclub')">Ver Modelo</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" onclick="openProduct('velvet')">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1544736779-b8fda7f9ab9a?w=700&q=80" alt="Mesa Velvet — Poker">
+        <div class="product-badge">Exclusivo</div>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Poker</div>
+        <div class="product-name">Mesa Velvet</div>
+        <div class="product-size">2,20m × 1,10m — 10 lugares</div>
+        <div class="product-footer">
+          <div class="product-price">R$ 15.900 <span>/ compra</span></div>
+          <button class="product-explore" onclick="event.stopPropagation();openProduct('velvet')">Ver Modelo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LIFESTYLE ==================== -->
+<section id="lifestyle">
+  <div class="section-label">Para Negócios Premium</div>
+  <div class="lifestyle-grid">
+    <div class="lifestyle-img-grid">
+      <!-- Imagens: lounge sofisticado, bar premium, ambiente social -->
+      <img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=800&q=80" class="lifestyle-img tall" alt="Sports Lounge Premium">
+      <img src="https://images.unsplash.com/photo-1611251135345-18c56206b863?w=400&q=80" class="lifestyle-img" alt="Mesa Sinuca">
+      <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=400&q=80" class="lifestyle-img" alt="Mesa Poker">
+    </div>
+    <div class="lifestyle-text">
+      <div class="section-label">Vérité Lounge</div>
+      <h2>Onde cada espaço conta uma <em>história</em> de exclusividade.</h2>
+      <p>Trabalhamos com bares, restaurantes, eventos corporativos, condomínios de alto padrão e espaços de entretenimento que entendem que o ambiente é parte da experiência.</p>
+      <p>Nossas mesas não são apenas equipamentos — são a âncora de momentos que constroem fidelidade, consumo e reputação para o seu negócio.</p>
+      <div class="lifestyle-stats">
+        <div><div class="stat-num">500+</div><div class="stat-label">Espaços Atendidos</div></div>
+        <div><div class="stat-num">12</div><div class="stat-label">Anos de Mercado</div></div>
+        <div><div class="stat-num">98%</div><div class="stat-label">Satisfação</div></div>
+        <div><div class="stat-num">24h</div><div class="stat-label">Suporte Premium</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer id="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo">VÉRITÉ<span> LOUNGE</span></div>
+      <p>Experiências premium em entretenimento. Mesas de alto padrão para quem entende que cada detalhe importa.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Produtos</h4>
+      <ul>
+        <li><a onclick="openCatPage('sinuca')">Sinuca</a></li>
+        <li><a onclick="openCatPage('poker')">Poker</a></li>
+        <li><a onclick="openCatPage('pingpong')">Ping Pong</a></li>
+        <li><a onclick="openCatPage('toto')">Totó</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Soluções</h4>
+      <ul>
+        <li><a href="#">Venda</a></li>
+        <li><a href="#">Locação</a></li>
+        <li><a href="#">Eventos</a></li>
+        <li><a href="#">Consultoria</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">E-mail</a></li>
+        <li><a href="#">Showroom</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Vérité Lounge. Todos os direitos reservados.</p>
+    <p style="color:rgba(200,169,107,0.4);font-size:11px;letter-spacing:2px;text-transform:uppercase;">Luxo em cada detalhe.</p>
+  </div>
+</footer>
+
+<!-- ============================================================
+     CATEGORY PAGES — CORREÇÃO CRÍTICA #3
+     ============================================================ -->
+<div class="cat-page" id="catPage">
+  <button class="page-back" id="catBackBtn">← Voltar</button>
+
+  <!-- Hero exclusivo por categoria -->
+  <div class="cat-hero">
+    <img id="catHeroImg" src="" alt="">
+    <div class="cat-hero-overlay"></div>
+    <div class="cat-hero-content">
+      <div class="cat-hero-tag" id="catHeroTag"></div>
+      <h1 class="cat-hero-title" id="catHeroTitle"></h1>
+      <p class="cat-hero-sub" id="catHeroSub"></p>
+    </div>
+  </div>
+
+  <!-- Identidade da categoria: 3 pilares -->
+  <div class="cat-identity">
+    <div class="cat-identity-grid" id="catIdentityGrid"></div>
+  </div>
+
+  <!-- Produtos da categoria -->
+  <div class="cat-products">
+    <div class="cat-products-header">
+      <div>
+        <h2 class="cat-products-title" id="catProductsTitle"></h2>
+        <p class="cat-products-sub" id="catProductsSub"></p>
+      </div>
+    </div>
+    <div class="cat-products-grid" id="catProductsGrid"></div>
+  </div>
+
+  <!-- Galeria de ambiente -->
+  <div class="cat-gallery">
+    <div class="cat-gallery-title" id="catGalleryTitle"></div>
+    <div class="cat-gallery-sub">Ambientes & Atmosfera</div>
+    <div class="cat-gallery-grid" id="catGalleryGrid"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PRODUCT DETAIL PAGE — CORREÇÃO CRÍTICA #2
+     ============================================================ -->
+<div class="detail-page" id="detailPage">
+
+  <!-- Nav de detalhe com breadcrumb -->
+  <div class="detail-nav">
+    <div class="detail-breadcrumb">
+      <span id="dBreadHome" style="cursor:pointer;color:rgba(245,245,245,0.4);">Início</span>
+      <span class="detail-breadcrumb-sep">›</span>
+      <span id="dBreadCat" style="cursor:pointer;color:rgba(245,245,245,0.4);"></span>
+      <span class="detail-breadcrumb-sep">›</span>
+      <span id="dBreadName" style="color:var(--gold);"></span>
+    </div>
+    <button class="detail-back-btn" id="detailBackBtn">← Voltar</button>
+  </div>
+
+  <!-- Conteúdo 2 colunas -->
+  <div class="detail-content">
+
+    <!-- Coluna Galeria -->
+    <div class="detail-gallery">
+      <img id="detailMainImg" src="" class="detail-main-img" alt="">
+      <div class="detail-thumbs" id="detailThumbs"></div>
+    </div>
+
+    <!-- Coluna Info -->
+    <div class="detail-info">
+      <div class="detail-badge-row">
+        <div class="detail-badge cat" id="detailCat"></div>
+        <div class="detail-badge tag" id="detailType"></div>
+      </div>
+      <h1 class="detail-title" id="detailName"></h1>
+      <div class="detail-tagline" id="detailTagline"></div>
+      <p class="detail-desc" id="detailDesc"></p>
+
+      <div class="detail-divider"></div>
+
+      <!-- Posicionamento estratégico -->
+      <div class="detail-positioning">
+        <p id="detailPositioning"></p>
+      </div>
+
+      <div class="detail-divider"></div>
+
+      <!-- Preços -->
+      <div class="price-block">
+        <div class="price-item">
+          <div class="price-type">Compra</div>
+          <div class="price-value" id="detailPrice"></div>
+          <div class="price-note">Parcelamento disponível</div>
+        </div>
+        <div class="price-item">
+          <div class="price-type">Locação Mensal</div>
+          <div class="price-value" id="detailRent" style="font-size:26px;"></div>
+          <div class="price-note">Manutenção inclusa</div>
+        </div>
+      </div>
+
+      <!-- Ações -->
+      <div class="detail-actions">
+        <button class="btn-full btn-buy">Solicitar Orçamento de Compra</button>
+        <button class="btn-full btn-rent">Solicitar Orçamento de Locação</button>
+        <button class="btn-full btn-contact">Falar com um Especialista</button>
+      </div>
+
+      <div class="detail-divider"></div>
+
+      <!-- Specs -->
+      <div class="specs-label">Especificações Técnicas</div>
+      <div class="specs-grid" id="detailSpecs"></div>
+    </div>
+  </div>
+
+  <!-- Produtos relacionados -->
+  <div class="related-section">
+    <div class="related-header">
+      <h3>Você também pode gostar</h3>
+      <p>Outras peças da nossa coleção premium</p>
+    </div>
+    <div class="related-grid" id="relatedGrid"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   DATA — Todos os produtos com imagens temáticas corretas
+   ============================================================ */
+const PRODUCTS = {
+  imperial:{
+    name:'Mesa Imperial',cat:'Sinuca',type:'Padrão Profissional',
+    size:'2,74m × 1,37m',price:'R$ 18.900',rent:'R$ 890/mês',
+    tagline:'O clássico revisitado com obsessão pelos detalhes.',
+    desc:'A Mesa Imperial representa o ápice da tradição em sinuca. Estrutura em carvalho europeu maciço, feltro Simonis 860 de competição e ardósia trifásica de 45mm garantem uma experiência de jogo incomparável em qualquer ambiente premium.',
+    positioning:'Uma peça como esta não apenas equipa um espaço — ela o define. Bares e clubes que investem na Imperial reportam aumento de permanência e ticket médio. É a ancoragem visual e social que transforma um ambiente comum em destino.',
+    img:'https://images.unsplash.com/photo-1611251135345-18c56206b863?w=1400&q=85',
+    imgs:[
+      'https://images.unsplash.com/photo-1611251135345-18c56206b863?w=500&q=80',
+      'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500&q=80',
+      'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=500&q=80',
+      'https://images.unsplash.com/photo-1534158914592-062992fbe900?w=500&q=80'
+    ],
+    specs:{Altura:'80 cm',Largura:'1,37 m',Comprimento:'2,74 m','Área de Jogo':'2,54m × 1,27m','Peso':'620 kg',Estrutura:'Carvalho Europeu',Campo:'Ardósia Trifásica 45mm',Feltro:'Simonis 860',Caçapas:'Couro Legítimo',Iluminação:'Trilho LED incluso',Garantia:'5 anos',Entrega:'Inclusa'}
+  },
+  prestige:{
+    name:'Mesa Prestige',cat:'Poker',type:'Oval Premium 9 Jogadores',
+    size:'2,40m × 1,20m',price:'R$ 12.500',rent:'R$ 620/mês',
+    tagline:'Onde estratégia encontra sofisticação absoluta.',
+    desc:'A Mesa Prestige foi criada para noites de poker de alto nível. Com feltro de competição em deep blue, porta-fichas embutidos em couro, suportes para bebidas e estrutura em mogno sólido, transforma qualquer sala em um clube privado de elite.',
+    positioning:'Espaços com mesas de poker de qualidade criam um ritual — os frequentadores retornam. A Prestige eleva o ambiente de bares e espaços corporativos a um nível de exclusividade que fideliza e diferencia.',
+    img:'https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=1400&q=85',
+    imgs:[
+      'https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=500&q=80',
+      'https://images.unsplash.com/photo-1544736779-b8fda7f9ab9a?w=500&q=80',
+      'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500&q=80',
+      'https://images.unsplash.com/photo-1611251135345-18c56206b863?w=500&q=80'
+    ],
+    specs:{Altura:'76 cm',Largura:'1,20 m',Comprimento:'2,40 m',Formato:'Oval — 9 jogadores','Peso':'85 kg',Feltro:'Azul Deep Navy',Estrutura:'Mogno Sólido','Porta-fichas':'9 embutidos em couro','Porta-copos':'9 em aço escovado',Gaveta:'Incluída',Garantia:'3 anos',Entrega:'Inclusa'}
+  },
+  noir:{
+    name:'Mesa Noir',cat:'Ping Pong',type:'ITTF Standard',
+    size:'2,74m × 1,52m',price:'R$ 7.800',rent:'R$ 420/mês',
+    tagline:'Performance profissional com estética de design.',
+    desc:'A Mesa Noir é a escolha de quem busca performance e design em um único equipamento. Superfície de 25mm homologada pela ITTF, estrutura em aço tratado com pintura em pó preta e suporte dobrável para armazenamento discreto.',
+    positioning:'O ping pong premium está em ascensão nos melhores lounges do mundo. A Mesa Noir traz esse movimento ao seu espaço com visual sofisticado que combina com ambientes de alto padrão sem abrir mão de desempenho real.',
+    img:'https://images.unsplash.com/photo-1534158914592-062992fbe900?w=1400&q=85',
+    imgs:[
+      'https://images.unsplash.com/photo-1534158914592-062992fbe900?w=500&q=80',
+      'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500&q=80',
+      'https://images.unsplash.com/photo-1611251135345-18c56206b863?w=500&q=80',
+      'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=500&q=80'
+    ],
+    specs:{Altura:'76 cm',Largura:'1,52 m',Comprimento:'2,74 m',Superfície:'MDF 25mm ITTF','Peso':'68 kg',Cor:'Preto Fosco',Estrutura:'Aço Tratado',Rede:'Incluída',Rodízios:'Travamento duplo',Dobrável:'Sim',Garantia:'2 anos',Entrega:'Inclusa'}
+  },
+  legacy:{
+    name:'Mesa Legacy',cat:'Totó',type:'Design Contemporâneo',
+    size:'1,40m × 0,74m',price:'R$ 6.200',rent:'R$ 320/mês',
+    tagline:'Diversão social premium para espaços que não abrem mão de qualidade.',
+    desc:'A Mesa Legacy é o totó premium que se adapta a qualquer ambiente de alto padrão. Com haste em aço carbono tratado, jogadores em polipropileno reforçado e estrutura em MDF de alta espessura revestido, entrega durabilidade e estética sem compromissos.',
+    positioning:'O totó premium cria interação natural entre pessoas que talvez nunca conversassem. Para bares e lounges, isso significa aumento de tempo de permanência e consumo. A Legacy é um investimento de retorno imediato e mensurável.',
+    img:'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=1400&q=85',
+    imgs:[
+      'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=500&q=80',
+      'https://images.unsplash.com/photo-1534158914592-062992fbe900?w=500&q=80',
+      'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500&q=80',
+      'https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=500&q=80'
+    ],
+    specs:{Altura:'90 cm',Largura:'74 cm',Comprimento:'1,40 m','Jogadores':'11 por time','Peso':'55 kg',Cor:'Preto Profundo',Estrutura:'MDF Revestido',Hastes:'Aço Carbono',Bolas:'3 incluídas',Fichas:'Sistema opt.',Garantia:'2 anos',Entrega:'Inclusa'}
+  },
+  royalclub:{
+    name:'Mesa Royal Club',cat:'Sinuca',type:'Grand Format — Clube Privado',
+    size:'3,00m × 1,50m',price:'R$ 28.500',rent:'R$ 1.200/mês',
+    tagline:'A presença monumental que define espaços de prestígio.',
+    desc:'A Mesa Royal Club é nossa peça mais monumental. Concebida para grandes salões e clubes privados de prestígio, sua ardósia pentafásica de 50mm e estrutura em madeira maciça pintada à mão criam uma presença inigualável que comanda qualquer ambiente.',
+    positioning:'Existe um nível de investimento em ambiente que não tem concorrente. Clubes e espaços que possuem a Royal Club sinalizam ao mercado que não fazem concessões. Uma peça que se paga em diferenciação e reconhecimento de marca.',
+    img:'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=1400&q=85',
+    imgs:[
+      'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500&q=80',
+      'https://images.unsplash.com/photo-1611251135345-18c56206b863?w=500&q=80',
+      'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=500&q=80',
+      'https://images.unsplash.com/photo-1534158914592-062992fbe900?w=500&q=80'
+    ],
+    specs:{Altura:'82 cm',Largura:'1,50 m',Comprimento:'3,00 m','Área de Jogo':'2,84m × 1,42m','Peso':'950 kg',Cor:'Ebony Premium',Estrutura:'Madeira Maciça',Campo:'Ardósia Pentafásica 50mm',Caçapas:'Couro de Búfalo',Iluminação:'Trilho LED incluso',Garantia:'10 anos',Entrega:'Inclusa montagem'}
+  },
+  velvet:{
+    name:'Mesa Velvet',cat:'Poker',type:'Oval Exclusiva — 10 Lugares',
+    size:'2,20m × 1,10m',price:'R$ 15.900',rent:'R$ 780/mês',
+    tagline:'A definição de sofisticação absoluta em cada rodada.',
+    desc:'A Mesa Velvet é a requintada escolha para quem quer transformar cada rodada em um ritual de elegância. Com feltro veludo borgonha, bordas estofadas em couro italiano e iluminação LED embutida em 3200K, ela cria uma atmosfera única.',
+    positioning:'A Mesa Velvet não é apenas uma mesa de poker — é um statement de marca. Ela comunica o nível do seu estabelecimento antes que qualquer palavra seja dita. Para clubes privados e lounges de alto padrão, é a peça central que tudo define.',
+    img:'https://images.unsplash.com/photo-1544736779-b8fda7f9ab9a?w=1400&q=85',
+    imgs:[
+      'https://images.unsplash.com/photo-1544736779-b8fda7f9ab9a?w=500&q=80',
+      'https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=500&q=80',
+      'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500&q=80',
+      'https://images.unsplash.com/photo-1611251135345-18c56206b863?w=500&q=80'
+    ],
+    specs:{Altura:'76 cm',Largura:'1,10 m',Comprimento:'2,20 m',Formato:'Oval — 10 jogadores','Peso':'90 kg',Feltro:'Veludo Borgonha',Estrutura:'Carvalho Americano',LED:'Embutida 3200K','Porta-fichas':'10 embutidos','Porta-copos':'10 em couro',Garantia:'3 anos',Entrega:'Inclusa montagem'}
+  }
+};
+
+/* ============================================================
+   DATA — Categorias com identidade visual própria
+   ============================================================ */
+const CATS = {
+  sinuca:{
+    title:'Sinuca',titleEm:'Sinuca',
+    tag:'Elegância · Tradição · Precisão',
+    sub:'Mesas de sinuca profissionais que unem a tradição do jogo à estética de ambientes de prestígio. Do espaço íntimo ao clube privado.',
+    heroImg:'https://images.unsplash.com/photo-1611251135345-18c56206b863?w=1920&q=85',
+    products:['imperial','royalclub'],
+    identity:[
+      {icon:'🎱',label:'Tradição',title:'Precisão de Campeonato',desc:'Ardósia e feltro Simonis para um jogo impecável em qualquer nível.'},
+      {icon:'🪵',label:'Construção',title:'Madeira Nobre Maciça',desc:'Carvalho e mogno europeu que envelhecem com dignidade e caráter.'},
+      {icon:'✨',label:'Presença',title:'Âncora Visual do Espaço',desc:'Uma mesa de sinuca premium define o tom de todo o ambiente ao redor.'}
+    ],
+    galleryTitle:'O Universo da Sinuca Premium',
+    gallery:[
+      'https://images.unsplash.com/photo-1611251135345-18c56206b863?w=900&q=80',
+      'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500&q=80',
+      'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=500&q=80',
+      'https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=500&q=80',
+      'https://images.unsplash.com/photo-1534158914592-062992fbe900?w=500&q=80'
+    ]
+  },
+  poker:{
+    title:'Poker',titleEm:'Poker',
+    tag:'Estratégia · Exclusividade · Networking',
+    sub:'Mesas de poker que transformam cada partida em uma experiência de clube privado. Feltro premium, estrutura imponente e atmosfera de exclusividade.',
+    heroImg:'https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=1920&q=85',
+    products:['prestige','velvet'],
+    identity:[
+      {icon:'♠️',label:'Jogo',title:'Feltro de Competição',desc:'Materiais selecionados que entregam a sensação de um cassino privado de alto nível.'},
+      {icon:'🥃',label:'Atmosfera',title:'Ritual e Exclusividade',desc:'Porta-fichas em couro, iluminação calibrada e acabamento que eleva cada rodada.'},
+      {icon:'🤝',label:'Social',title:'Networking de Alto Valor',desc:'O poker premium atrai o perfil de cliente que valoriza sofisticação e permanece.'}
+    ],
+    galleryTitle:'O Universo do Poker Premium',
+    gallery:[
+      'https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=900&q=80',
+      'https://images.unsplash.com/photo-1544736779-b8fda7f9ab9a?w=500&q=80',
+      'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500&q=80',
+      'https://images.unsplash.com/photo-1611251135345-18c56206b863?w=500&q=80',
+      'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=500&q=80'
+    ]
+  },
+  pingpong:{
+    title:'Ping Pong',titleEm:'Ping Pong',
+    tag:'Movimento · Energia Sofisticada · Interação',
+    sub:'Performance ITTF com design que combina com os melhores ambientes. O ping pong premium que está conquistando os lounges mais sofisticados do mundo.',
+    heroImg:'https://images.unsplash.com/photo-1534158914592-062992fbe900?w=1920&q=85',
+    products:['noir'],
+    identity:[
+      {icon:'🏓',label:'Performance',title:'Padrão Internacional ITTF',desc:'Superfícies homologadas que entregam consistência de rebote em qualquer nível de jogo.'},
+      {icon:'⚫',label:'Design',title:'Estética de Lounge Premium',desc:'Visual preto fosco que integra-se perfeitamente a ambientes sofisticados e modernos.'},
+      {icon:'⚡',label:'Dinamismo',title:'Energia que Atrai e Mantém',desc:'O ping pong gera engajamento imediato — pessoas se reúnem, competem e consomem mais.'}
+    ],
+    galleryTitle:'O Universo do Ping Pong Premium',
+    gallery:[
+      'https://images.unsplash.com/photo-1534158914592-062992fbe900?w=900&q=80',
+      'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500&q=80',
+      'https://images.unsplash.com/photo-1611251135345-18c56206b863?w=500&q=80',
+      'https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=500&q=80',
+      'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=500&q=80'
+    ]
+  },
+  toto:{
+    title:'Totó',titleEm:'Totó',
+    tag:'Diversão Social Premium · Competição Leve · Conexão',
+    sub:'Totós de design contemporâneo que transformam qualquer espaço em um ambiente de lazer de alto padrão. Robustos, elegantes e construídos para gerar conexão.',
+    heroImg:'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=1920&q=85',
+    products:['legacy'],
+    identity:[
+      {icon:'⚽',label:'Estrutura',title:'Engenharia de Alta Resistência',desc:'Hastes em aço carbono e corpo em MDF premium que suportam uso intenso com elegância.'},
+      {icon:'🎯',label:'Diversão',title:'Competição que Une Pessoas',desc:'O totó cria interações orgânicas e memoráveis que constroem laços e aumentam permanência.'},
+      {icon:'🎨',label:'Design',title:'Visual de Lounge Moderno',desc:'Linhas contemporâneas e acabamento em preto profundo que integram qualquer ambiente premium.'}
+    ],
+    galleryTitle:'O Universo do Totó Premium',
+    gallery:[
+      'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=900&q=80',
+      'https://images.unsplash.com/photo-1534158914592-062992fbe900?w=500&q=80',
+      'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500&q=80',
+      'https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=500&q=80',
+      'https://images.unsplash.com/photo-1611251135345-18c56206b863?w=500&q=80'
+    ]
+  }
+};
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let currentSlide = 0;
+let slideInterval;
+let currentCat = null;
+let prevPage = null; // 'cat' ou null
+
+/* ============================================================
+   HERO SLIDESHOW
+   ============================================================ */
+function goToSlide(n) {
+  document.querySelectorAll('.hero-slide').forEach((s,i) => s.classList.toggle('active', i === n));
+  document.querySelectorAll('.indicator').forEach((d,i) => d.classList.toggle('active', i === n));
+  currentSlide = n;
+}
+function startSlides() {
+  slideInterval = setInterval(() => goToSlide((currentSlide + 1) % 3), 4000);
+}
+startSlides();
+
+/* ============================================================
+   NAV UTILS
+   ============================================================ */
+function scrollToSection(id) {
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+}
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function goHome() {
+  closeDetailPage();
+  closeCatPage();
+}
+
+/* ============================================================
+   CATEGORY PAGE
+   ============================================================ */
+function openCatPage(catKey) {
+  const c = CATS[catKey];
+  if (!c) return;
+  currentCat = catKey;
+
+  // Hero
+  document.getElementById('catHeroImg').src = c.heroImg;
+  document.getElementById('catHeroTag').textContent = c.tag;
+  document.getElementById('catHeroTitle').innerHTML = c.title;
+  document.getElementById('catHeroSub').textContent = c.sub;
+
+  // Identity pillars
+  document.getElementById('catIdentityGrid').innerHTML = c.identity.map(item => `
+    <div class="cat-identity-item">
+      <div class="cat-identity-icon">${item.icon}</div>
+      <div class="cat-identity-label">${item.label}</div>
+      <div class="cat-identity-title">${item.title}</div>
+      <div class="cat-identity-desc">${item.desc}</div>
+    </div>`).join('');
+
+  // Products
+  document.getElementById('catProductsTitle').textContent = 'Coleção ' + c.title;
+  document.getElementById('catProductsSub').textContent = c.products.length + ' modelos disponíveis';
+  document.getElementById('catProductsGrid').innerHTML = c.products.map(pid => buildProductCard(pid)).join('');
+
+  // Gallery
+  document.getElementById('catGalleryTitle').textContent = c.galleryTitle;
+  const [main,...rest] = c.gallery;
+  document.getElementById('catGalleryGrid').innerHTML =
+    `<img src="${main}" class="cat-gallery-img main" alt="">` +
+    rest.map(src => `<img src="${src}" class="cat-gallery-img" alt="" loading="lazy">`).join('');
+
+  // Back button
+  document.getElementById('catBackBtn').onclick = () => closeCatPage();
+
+  const page = document.getElementById('catPage');
+  page.classList.add('open');
+  page.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  document.getElementById('mainNav').style.display = 'none';
+}
+
+function closeCatPage() {
+  document.getElementById('catPage').classList.remove('open');
+  document.body.style.overflow = '';
+  currentCat = null;
+  document.getElementById('mainNav').style.display = '';
+}
+
+/* ============================================================
+   PRODUCT DETAIL PAGE
+   ============================================================ */
+function buildProductCard(pid) {
+  const p = PRODUCTS[pid];
+  return `<div class="product-card" onclick="openProduct('${pid}')">
+    <div class="product-img-wrap"><img src="${p.img.replace('w=1400','w=700')}" alt="${p.name}" loading="lazy"></div>
+    <div class="product-info">
+      <div class="product-cat">${p.cat}</div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-size">${p.size}</div>
+      <div class="product-footer">
+        <div class="product-price">${p.price} <span>/ compra</span></div>
+        <button class="product-explore" onclick="event.stopPropagation();openProduct('${pid}')">Ver Modelo</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function openProduct(pid) {
+  const p = PRODUCTS[pid];
+  if (!p) return;
+  prevPage = currentCat ? 'cat' : null;
+
+  // Breadcrumb
+  document.getElementById('dBreadHome').textContent = 'Início';
+  document.getElementById('dBreadHome').onclick = () => { closeDetailPage(); closeCatPage(); };
+  document.getElementById('dBreadCat').textContent = p.cat;
+  document.getElementById('dBreadCat').onclick = () => {
+    closeDetailPage();
+    const key = Object.keys(CATS).find(k => CATS[k].title === p.cat);
+    if (key && !currentCat) openCatPage(key);
+  };
+  document.getElementById('dBreadName').textContent = p.name;
+
+  // Back button
+  document.getElementById('detailBackBtn').onclick = () => closeDetailPage();
+
+  // Gallery
+  document.getElementById('detailMainImg').src = p.img;
+  document.getElementById('detailMainImg').alt = p.name;
+  document.getElementById('detailThumbs').innerHTML = p.imgs.map((src,i) =>
+    `<img src="${src}" class="detail-thumb${i===0?' active':''}" onclick="setMainImg(this,'${src.replace('w=500','w=1400')}')" alt="" loading="lazy">`
+  ).join('');
+
+  // Info
+  document.getElementById('detailCat').textContent = p.cat;
+  document.getElementById('detailType').textContent = p.type;
+  document.getElementById('detailName').textContent = p.name;
+  document.getElementById('detailTagline').textContent = p.tagline;
+  document.getElementById('detailDesc').textContent = p.desc;
+  document.getElementById('detailPositioning').textContent = p.positioning;
+  document.getElementById('detailPrice').textContent = p.price;
+  document.getElementById('detailRent').textContent = p.rent;
+
+  // Specs
+  document.getElementById('detailSpecs').innerHTML = Object.entries(p.specs).map(([k,v]) =>
+    `<div class="spec-item"><div class="spec-label">${k}</div><div class="spec-value">${v}</div></div>`
+  ).join('');
+
+  // Related
+  const others = Object.entries(PRODUCTS).filter(([k]) => k !== pid).slice(0,3);
+  document.getElementById('relatedGrid').innerHTML = others.map(([k]) => buildProductCard(k)).join('');
+
+  const page = document.getElementById('detailPage');
+  page.classList.add('open');
+  page.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  document.getElementById('mainNav').style.display = 'none';
+}
+
+function closeDetailPage() {
+  document.getElementById('detailPage').classList.remove('open');
+  if (!currentCat) {
+    document.body.style.overflow = '';
+    document.getElementById('mainNav').style.display = '';
+  }
+}
+
+function setMainImg(el, src) {
+  document.getElementById('detailMainImg').src = src;
+  document.querySelectorAll('.detail-thumb').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
