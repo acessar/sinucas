@@ -421,100 +421,6 @@ section{padding:64px 6%;}
   </div>
 </section>
 
-<!-- ==================== PRODUCTS ==================== -->
-<section id="products" style="background:var(--dark);">
-  <div class="section-label">Coleção em Destaque</div>
-  <h2 class="section-title">Peças que <em>definem</em><br>a excelência.</h2>
-  <div class="products-grid">
-    <div class="product-card" onclick="openProduct('imperial')">
-      <div class="product-img-wrap">
-        <img src="https://images.unsplash.com/photo-1611251135345-18c56206b863?w=700&q=80" alt="Mesa Imperial — Sinuca">
-        <div class="product-badge">Destaque</div>
-      </div>
-      <div class="product-info">
-        <div class="product-cat">Sinuca</div>
-        <div class="product-name">Mesa Imperial</div>
-        <div class="product-size">2,74m × 1,37m — Padrão Profissional</div>
-        <div class="product-footer">
-          <div class="product-price">R$ 18.900 <span>/ compra</span></div>
-          <button class="product-explore" onclick="event.stopPropagation();openProduct('imperial')">Ver Modelo</button>
-        </div>
-      </div>
-    </div>
-    <div class="product-card" onclick="openProduct('prestige')">
-      <div class="product-img-wrap">
-        <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=700&q=80" alt="Mesa Prestige — Poker">
-      </div>
-      <div class="product-info">
-        <div class="product-cat">Poker</div>
-        <div class="product-name">Mesa Prestige</div>
-        <div class="product-size">2,40m × 1,20m — Oval Premium</div>
-        <div class="product-footer">
-          <div class="product-price">R$ 12.500 <span>/ compra</span></div>
-          <button class="product-explore" onclick="event.stopPropagation();openProduct('prestige')">Ver Modelo</button>
-        </div>
-      </div>
-    </div>
-    <div class="product-card" onclick="openProduct('noir')">
-      <div class="product-img-wrap">
-        <img src="https://images.unsplash.com/photo-1534158914592-062992fbe900?w=700&q=80" alt="Mesa Noir — Ping Pong">
-      </div>
-      <div class="product-info">
-        <div class="product-cat">Ping Pong</div>
-        <div class="product-name">Mesa Noir</div>
-        <div class="product-size">2,74m × 1,52m — ITTF Standard</div>
-        <div class="product-footer">
-          <div class="product-price">R$ 7.800 <span>/ compra</span></div>
-          <button class="product-explore" onclick="event.stopPropagation();openProduct('noir')">Ver Modelo</button>
-        </div>
-      </div>
-    </div>
-    <div class="product-card" onclick="openProduct('legacy')">
-      <div class="product-img-wrap">
-        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=700&q=80" alt="Mesa Legacy — Totó">
-        <div class="product-badge">Novo</div>
-      </div>
-      <div class="product-info">
-        <div class="product-cat">Totó</div>
-        <div class="product-name">Mesa Legacy</div>
-        <div class="product-size">1,40m × 0,74m — Design Contemporâneo</div>
-        <div class="product-footer">
-          <div class="product-price">R$ 6.200 <span>/ compra</span></div>
-          <button class="product-explore" onclick="event.stopPropagation();openProduct('legacy')">Ver Modelo</button>
-        </div>
-      </div>
-    </div>
-    <div class="product-card" onclick="openProduct('royalclub')">
-      <div class="product-img-wrap">
-        <img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=700&q=80" alt="Mesa Royal Club — Sinuca">
-      </div>
-      <div class="product-info">
-        <div class="product-cat">Sinuca</div>
-        <div class="product-name">Mesa Royal Club</div>
-        <div class="product-size">3,00m × 1,50m — Grand Format</div>
-        <div class="product-footer">
-          <div class="product-price">R$ 28.500 <span>/ compra</span></div>
-          <button class="product-explore" onclick="event.stopPropagation();openProduct('royalclub')">Ver Modelo</button>
-        </div>
-      </div>
-    </div>
-    <div class="product-card" onclick="openProduct('velvet')">
-      <div class="product-img-wrap">
-        <img src="https://images.unsplash.com/photo-1544736779-b8fda7f9ab9a?w=700&q=80" alt="Mesa Velvet — Poker">
-        <div class="product-badge">Exclusivo</div>
-      </div>
-      <div class="product-info">
-        <div class="product-cat">Poker</div>
-        <div class="product-name">Mesa Velvet</div>
-        <div class="product-size">2,20m × 1,10m — 10 lugares</div>
-        <div class="product-footer">
-          <div class="product-price">R$ 15.900 <span>/ compra</span></div>
-          <button class="product-explore" onclick="event.stopPropagation();openProduct('velvet')">Ver Modelo</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ==================== LIFESTYLE ==================== -->
 <section id="lifestyle">
@@ -815,10 +721,7 @@ const CATS = {
     heroImg:'https://images.unsplash.com/photo-1611251135345-18c56206b863?w=1920&q=85',
     products:['imperial','royalclub'],
     identity:[
-      {icon:'🎱',label:'Tradição',title:'Precisão de Campeonato',desc:'Ardósia e feltro Simonis para um jogo impecável em qualquer nível.'},
-      {icon:'🪵',label:'Construção',title:'Madeira Nobre Maciça',desc:'Carvalho e mogno europeu que envelhecem com dignidade e caráter.'},
-      {icon:'✨',label:'Presença',title:'Âncora Visual do Espaço',desc:'Uma mesa de sinuca premium define o tom de todo o ambiente ao redor.'}
-    ],
+ ],
     galleryTitle:'O Universo da Sinuca Premium',
     gallery:[
       'https://images.unsplash.com/photo-1611251135345-18c56206b863?w=900&q=80',
@@ -835,10 +738,7 @@ const CATS = {
     heroImg:'https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=1920&q=85',
     products:['prestige','velvet'],
     identity:[
-      {icon:'♠️',label:'Jogo',title:'Feltro de Competição',desc:'Materiais selecionados que entregam a sensação de um cassino privado de alto nível.'},
-      {icon:'🥃',label:'Atmosfera',title:'Ritual e Exclusividade',desc:'Porta-fichas em couro, iluminação calibrada e acabamento que eleva cada rodada.'},
-      {icon:'🤝',label:'Social',title:'Networking de Alto Valor',desc:'O poker premium atrai o perfil de cliente que valoriza sofisticação e permanece.'}
-    ],
+  ],
     galleryTitle:'O Universo do Poker Premium',
     gallery:[
       'https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=900&q=80',
@@ -855,10 +755,7 @@ const CATS = {
     heroImg:'https://images.unsplash.com/photo-1534158914592-062992fbe900?w=1920&q=85',
     products:['noir'],
     identity:[
-      {icon:'🏓',label:'Performance',title:'Padrão Internacional ITTF',desc:'Superfícies homologadas que entregam consistência de rebote em qualquer nível de jogo.'},
-      {icon:'⚫',label:'Design',title:'Estética de Lounge Premium',desc:'Visual preto fosco que integra-se perfeitamente a ambientes sofisticados e modernos.'},
-      {icon:'⚡',label:'Dinamismo',title:'Energia que Atrai e Mantém',desc:'O ping pong gera engajamento imediato — pessoas se reúnem, competem e consomem mais.'}
-    ],
+   ],
     galleryTitle:'O Universo do Ping Pong Premium',
     gallery:[
       'https://images.unsplash.com/photo-1534158914592-062992fbe900?w=900&q=80',
@@ -875,9 +772,6 @@ const CATS = {
     heroImg:'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=1920&q=85',
     products:['legacy'],
     identity:[
-      {icon:'⚽',label:'Estrutura',title:'Engenharia de Alta Resistência',desc:'Hastes em aço carbono e corpo em MDF premium que suportam uso intenso com elegância.'},
-      {icon:'🎯',label:'Diversão',title:'Competição que Une Pessoas',desc:'O totó cria interações orgânicas e memoráveis que constroem laços e aumentam permanência.'},
-      {icon:'🎨',label:'Design',title:'Visual de Lounge Moderno',desc:'Linhas contemporâneas e acabamento em preto profundo que integram qualquer ambiente premium.'}
     ],
     galleryTitle:'O Universo do Totó Premium',
     gallery:[
