@@ -97,11 +97,12 @@
     display:flex;align-items:flex-end;
     overflow:hidden;
   }
+  /* FIX #4 — sombra reduzida: de 0.85/0.95 para 0.55/0.65 */
   .hero-bg{
     position:absolute;inset:0;
     background:
-      linear-gradient(to right, rgba(5,5,5,0.85) 40%, rgba(5,5,5,0.2) 100%),
-      linear-gradient(to top, rgba(5,5,5,0.95) 0%, transparent 50%);
+      linear-gradient(to right, rgba(5,5,5,0.55) 40%, rgba(5,5,5,0.12) 100%),
+      linear-gradient(to top, rgba(5,5,5,0.65) 0%, transparent 50%);
     z-index:1;
   }
   .hero-img{
@@ -394,45 +395,72 @@
 
   /* ===== PRODUCT DETAIL PAGE ===== */
   .product-detail{padding-top:80px;min-height:100vh}
+
+  /* FIX #3 — Botão de voltar sempre visível, acima do navbar */
+  .detail-back-bar{
+    position:relative;
+    z-index:200; /* acima do nav (z-index:100) */
+    padding:100px 60px 0; /* espaço suficiente para não ficar atrás da navbar */
+    background:var(--black);
+  }
   .detail-back{
     display:inline-flex;align-items:center;gap:10px;
-    padding:30px 60px 0;
     font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
     color:var(--white-muted);cursor:pointer;transition:color 0.3s;
     text-decoration:none;background:none;border:none;font-family:var(--font-sans);
+    padding:10px 0;
   }
   .detail-back:hover{color:var(--gold)}
-  .detail-back::before{content:'←';font-size:14px}
+  .detail-back::before{content:'←';font-size:14px;color:var(--gold)}
 
   .detail-hero{
     display:grid;grid-template-columns:1fr 1fr;gap:0;
-    min-height:80vh;margin-top:20px;
+    min-height:80vh;
   }
+
+  /* FIX #2 — Galeria com setas e dots */
   .detail-gallery{
     position:relative;overflow:hidden;background:var(--black-mid);
   }
-  .detail-main-img{
-    width:100%;height:100%;min-height:560px;
-    background-size:cover;background-position:center;
-    transition:transform 0.6s ease;
+  .gallery-slides{
+    position:relative;width:100%;height:100%;min-height:560px;
   }
-  .detail-main-img:hover{transform:scale(1.03)}
+  .gallery-slide{
+    position:absolute;inset:0;
+    background-size:cover;background-position:center;
+    opacity:0;transition:opacity 0.5s ease;
+  }
+  .gallery-slide.active{opacity:1}
+  .gallery-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);
+    z-index:10;background:rgba(5,5,5,0.6);border:1px solid var(--gold-dark);
+    color:var(--gold);width:44px;height:44px;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:18px;
+    transition:all 0.3s;backdrop-filter:blur(4px);
+  }
+  .gallery-arrow:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
+  .gallery-arrow-left{left:16px}
+  .gallery-arrow-right{right:16px}
+  .gallery-dots{
+    position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+    display:flex;gap:8px;z-index:10;
+  }
+  .gallery-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:rgba(255,255,255,0.3);border:1px solid var(--gold-dark);
+    cursor:pointer;transition:all 0.3s;
+  }
+  .gallery-dot.active{background:var(--gold);border-color:var(--gold)}
   .detail-gallery-overlay{
     position:absolute;inset:0;
     background:linear-gradient(135deg,rgba(201,168,76,0.06),transparent);
-    pointer-events:none;
+    pointer-events:none;z-index:5;
   }
   .detail-thumbnails{
-    position:absolute;bottom:24px;left:24px;
-    display:flex;gap:8px;
+    position:absolute;bottom:20px;left:16px;
+    display:none; /* substituídos pelos dots */
   }
-  .detail-thumb{
-    width:56px;height:42px;
-    background-size:cover;background-position:center;
-    border:1px solid transparent;cursor:pointer;
-    transition:border-color 0.3s;opacity:0.6;
-  }
-  .detail-thumb.active,.detail-thumb:hover{border-color:var(--gold);opacity:1}
 
   .detail-info{
     background:var(--black-mid);padding:70px 60px;
@@ -500,14 +528,41 @@
   .spec-value{font-family:var(--font-serif);font-size:20px;color:var(--white);font-weight:500}
   .spec-unit{font-size:11px;color:var(--white-muted);font-family:var(--font-sans);font-weight:300}
 
-  /* RELATED */
+  /* FIX #1 — RELATED: carrossel horizontal */
   .detail-related{padding:80px 60px;background:var(--black-mid)}
   .related-title{
     font-family:var(--font-serif);font-size:clamp(28px,3vw,40px);
     color:var(--white);font-weight:600;margin-bottom:40px;
   }
   .related-title em{color:var(--gold);font-style:italic}
-  .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+
+  .related-carousel-wrap{position:relative}
+  .related-carousel{
+    display:flex;gap:2px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    scroll-behavior:smooth;
+  }
+  .related-carousel::-webkit-scrollbar{display:none}
+  .related-carousel .product-card{
+    flex:0 0 calc(33.33% - 2px);
+    min-width:260px;
+    scroll-snap-align:start;
+    aspect-ratio:3/4;
+  }
+  .carousel-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);
+    z-index:10;background:rgba(5,5,5,0.7);border:1px solid var(--gold-dark);
+    color:var(--gold);width:44px;height:44px;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:18px;
+    transition:all 0.3s;backdrop-filter:blur(4px);
+  }
+  .carousel-arrow:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
+  .carousel-arrow-left{left:-22px}
+  .carousel-arrow-right{right:-22px}
 
   /* ===== CONTACT MODAL ===== */
   .modal-overlay{
@@ -623,14 +678,16 @@
     .footer-inner{grid-template-columns:1fr 1fr;gap:40px}
     .detail-hero{grid-template-columns:1fr}
     .specs-grid{grid-template-columns:repeat(2,1fr)}
-    .related-grid{grid-template-columns:repeat(2,1fr)}
-    .detail-back{padding:24px 30px 0}
+    .detail-back-bar{padding:90px 30px 0}
     .detail-info{padding:50px 30px}
     .detail-specs{padding:60px 30px}
     .detail-related{padding:60px 30px}
     .modal{padding:40px 30px}
     .envs-modal{padding:40px 30px}
     .envs-modal-grid{grid-template-columns:repeat(2,1fr)}
+    .related-carousel .product-card{flex:0 0 calc(50% - 2px)}
+    .carousel-arrow-left{left:-16px}
+    .carousel-arrow-right{right:-16px}
   }
 
   @media(max-width:768px){
@@ -658,21 +715,22 @@
     .footer-inner{grid-template-columns:1fr;gap:30px}
     .footer-bottom{flex-direction:column;gap:20px;text-align:center}
     .detail-hero{min-height:auto}
-    .detail-main-img{min-height:280px}
+    .gallery-slides{min-height:280px}
     .detail-info{padding:36px 20px}
     .detail-name{font-size:clamp(30px,8vw,44px)}
     .detail-ctas{flex-direction:column}
     .detail-ctas .btn-gold,.detail-ctas .btn-outline{text-align:center}
     .specs-grid{grid-template-columns:1fr 1fr}
-    .related-grid{grid-template-columns:1fr}
     .detail-specs{padding:50px 20px}
     .detail-related{padding:50px 20px}
-    .detail-back{padding:20px 20px 0}
+    .detail-back-bar{padding:80px 20px 0}
     .modal{padding:32px 20px}
     .modal-title{font-size:26px}
     .envs-modal{padding:32px 20px}
     .envs-modal-grid{grid-template-columns:1fr}
     .section-title{font-size:clamp(28px,7vw,44px)}
+    .related-carousel .product-card{flex:0 0 calc(85% - 2px)}
+    .carousel-arrow{display:none}
   }
 
   @media(max-width:480px){
@@ -787,161 +845,7 @@
 
 <div class="gold-divider"></div>
 
-<!-- POSITIONING -->
-<div class="position-section" id="sobre">
-  <div class="position-img"></div>
-  <div class="position-content fade-up">
-    <p class="section-eyebrow">Luxo que se sente</p>
-    <h2 class="section-title">Por que ter uma mesa de sinuca é um símbolo de sofisticação?</h2>
-    <div class="position-divider"></div>
-    <p class="position-text">Mais do que um jogo, uma mesa de sinuca representa bom gosto, momentos memoráveis e a valorização do seu ambiente.</p>
-    <div class="position-features">
-      <div class="position-feat">
-        <div class="position-feat-icon">◆</div>
-        <div class="position-feat-label">Valoriza seu ambiente</div>
-        <div class="position-feat-sub">Presença imediata</div>
-      </div>
-      <div class="position-feat">
-        <div class="position-feat-icon">✦</div>
-        <div class="position-feat-label">Recebe com impressão</div>
-        <div class="position-feat-sub">Experiência memorável</div>
-      </div>
-      <div class="position-feat">
-        <div class="position-feat-icon">◈</div>
-        <div class="position-feat-label">Momentos que conectam</div>
-        <div class="position-feat-sub">Convívio sofisticado</div>
-      </div>
-      <div class="position-feat">
-        <div class="position-feat-icon">❖</div>
-        <div class="position-feat-label">Exclusividade em cada detalhe</div>
-        <div class="position-feat-sub">Acabamento impecável</div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<div class="gold-divider"></div>
-
-<!-- ENVIRONMENTS -->
-<section id="ambientes">
-  <div class="envs-header fade-up">
-    <div>
-      <p class="section-eyebrow">Ambientes que inspiram</p>
-      <h2 class="section-title">Projetadas para elevar<br><em>qualquer espaço.</em></h2>
-    </div>
-    <a class="see-all" onclick="openEnvsModal()">Ver Mais Ambientes &nbsp;→</a>
-  </div>
-  <div class="envs-grid">
-    <div class="env-card" onclick="openEnvsModal()">
-      <div class="env-img env-img-1"></div>
-      <div class="env-overlay"></div>
-      <div class="env-label">Residências</div>
-    </div>
-    <div class="env-card" onclick="openEnvsModal()">
-      <div class="env-img env-img-2"></div>
-      <div class="env-overlay"></div>
-      <div class="env-label">Áreas Gourmet</div>
-    </div>
-    <div class="env-card" onclick="openEnvsModal()">
-      <div class="env-img env-img-3"></div>
-      <div class="env-overlay"></div>
-      <div class="env-label">Bars & Lounges</div>
-    </div>
-    <div class="env-card" onclick="openEnvsModal()">
-      <div class="env-img env-img-4"></div>
-      <div class="env-overlay"></div>
-      <div class="env-label">Coberturas</div>
-    </div>
-    <div class="env-card" onclick="openEnvsModal()">
-      <div class="env-img env-img-5"></div>
-      <div class="env-overlay"></div>
-      <div class="env-label">Espaços Gamer</div>
-    </div>
-  </div>
-</section>
-
-<div class="gold-divider"></div>
-
-<!-- EXPERIENCE -->
-<section class="exp-section" id="experiencia">
-  <p class="section-eyebrow fade-up">Experiência Premium</p>
-  <h2 class="section-title fade-up">Mais que um produto.<br>Uma experiência <em>completa.</em></h2>
-  <div class="exp-grid">
-    <div class="exp-item fade-up fade-up-delay-1">
-      <div class="exp-icon">◈</div>
-      <div class="exp-name">Entrega Especializada</div>
-      <div class="exp-desc">Logística controlada do início ao fim</div>
-    </div>
-    <div class="exp-item fade-up fade-up-delay-2">
-      <div class="exp-icon">▣</div>
-      <div class="exp-name">Montagem Profissional</div>
-      <div class="exp-desc">Equipe técnica certificada no local</div>
-    </div>
-    <div class="exp-item fade-up fade-up-delay-3">
-      <div class="exp-icon">◆</div>
-      <div class="exp-name">Garantia Vitalícia</div>
-      <div class="exp-desc">Estrutura e componentes para sempre</div>
-    </div>
-    <div class="exp-item fade-up fade-up-delay-4">
-      <div class="exp-icon">✦</div>
-      <div class="exp-name">Atendimento Exclusivo</div>
-      <div class="exp-desc">Consultor dedicado para cada projeto</div>
-    </div>
-    <div class="exp-item fade-up fade-up-delay-4">
-      <div class="exp-icon">❖</div>
-      <div class="exp-name">Suporte Pós-venda</div>
-      <div class="exp-desc">Assistência técnica especializada</div>
-    </div>
-  </div>
-</section>
-
-<div class="gold-divider"></div>
-
-<!-- TESTIMONIALS -->
-<section id="depoimentos">
-  <div class="test-header fade-up">
-    <div>
-      <p class="section-eyebrow">Quem vive, recomenda</p>
-      <h2 class="section-title">Histórias reais.<br><em>Ambientes reais.</em></h2>
-    </div>
-    <a class="see-all" onclick="openContact()">Ver Mais Depoimentos &nbsp;→</a>
-  </div>
-  <div class="test-grid">
-    <div class="test-card fade-up fade-up-delay-1">
-      <div class="test-quote">"</div>
-      <p class="test-text">A mesa transformou completamente meu espaço gourmet. O acabamento é impecável e todos os detalhes transmitem exclusividade.</p>
-      <div class="test-author">
-        <div class="test-avatar"><img src="https://i.pravatar.cc/80?img=11" alt="Ricardo Almeida"></div>
-        <div>
-          <div class="test-name">Ricardo Almeida</div>
-          <div class="test-role">Empresário</div>
-        </div>
-      </div>
-    </div>
-    <div class="test-card fade-up fade-up-delay-2">
-      <div class="test-quote">"</div>
-      <p class="test-text">Mais do que uma mesa, adquirimos momentos. A qualidade é algo que se percebe no primeiro olhar.</p>
-      <div class="test-author">
-        <div class="test-avatar"><img src="https://i.pravatar.cc/80?img=5" alt="Juliana Martins"></div>
-        <div>
-          <div class="test-name">Juliana Martins</div>
-          <div class="test-role">Arquiteta</div>
-        </div>
-      </div>
-    </div>
-    <div class="test-card fade-up fade-up-delay-3">
-      <div class="test-quote">"</div>
-      <p class="test-text">Atendimento impecável do início ao fim. A mesa ficou perfeita no nosso bar e elevou ao nível do ambiente.</p>
-      <div class="test-author">
-        <div class="test-avatar"><img src="https://i.pravatar.cc/80?img=33" alt="Fernando Costa"></div>
-        <div>
-          <div class="test-name">Fernando Costa</div>
-          <div class="test-role">Proprietário de Bar</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- FOOTER -->
 <footer>
@@ -1196,6 +1100,8 @@ function showHome(){
 
 function openProduct(idx){
   const p = products[idx];
+
+  // FIX #1 — Related como carrossel horizontal
   const relatedCards = p.related.map(ri=>{
     const rp = products[ri];
     return `<div class="product-card" onclick="openProduct(${ri})" style="cursor:pointer">
@@ -1208,10 +1114,15 @@ function openProduct(idx){
     </div>`;
   }).join('');
 
-  const thumbs = p.images.map((img,i)=>`
-    <div class="detail-thumb ${i===0?'active':''}" 
+  // FIX #2 — Galeria com slides, setas e dots
+  const slides = p.images.map((img,i)=>`
+    <div class="gallery-slide ${i===0?'active':''}" 
       style="background-image:url('${img}')"
-      onclick="switchImage('${img}',this)"></div>
+      data-idx="${i}"></div>
+  `).join('');
+
+  const dots = p.images.map((_,i)=>`
+    <div class="gallery-dot ${i===0?'active':''}" onclick="galleryGoTo(${i})"></div>
   `).join('');
 
   const specs = p.specs.map(s=>`
@@ -1222,12 +1133,20 @@ function openProduct(idx){
   `).join('');
 
   const html = `
-    <a class="detail-back" onclick="showHome()">Voltar à Coleção</a>
+    <!-- FIX #3 — Botão de voltar visível, fora do fluxo da navbar -->
+    <div class="detail-back-bar">
+      <button class="detail-back" onclick="showHome()">Voltar à Coleção</button>
+    </div>
+
     <div class="detail-hero">
       <div class="detail-gallery">
-        <div class="detail-main-img" id="detailMainImg" style="background-image:url('${p.images[0]}')"></div>
+        <div class="gallery-slides" id="gallerySlides">
+          ${slides}
+        </div>
         <div class="detail-gallery-overlay"></div>
-        <div class="detail-thumbnails">${thumbs}</div>
+        <div class="gallery-arrow gallery-arrow-left" onclick="galleryPrev()">&#8592;</div>
+        <div class="gallery-arrow gallery-arrow-right" onclick="galleryNext()">&#8594;</div>
+        <div class="gallery-dots">${dots}</div>
       </div>
       <div class="detail-info">
         ${p.tag?`<div style="display:inline-block;background:var(--gold);color:var(--black);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;font-weight:600;margin-bottom:16px">${p.tag}</div>`:''}
@@ -1261,20 +1180,69 @@ function openProduct(idx){
     </div>
     <div class="detail-related">
       <h2 class="related-title">Você também <em>pode gostar</em></h2>
-      <div class="related-grid">${relatedCards}</div>
+      <div class="related-carousel-wrap">
+        <div class="carousel-arrow carousel-arrow-left" onclick="carouselPrev()">&#8592;</div>
+        <div class="related-carousel" id="relatedCarousel">
+          ${relatedCards}
+        </div>
+        <div class="carousel-arrow carousel-arrow-right" onclick="carouselNext()">&#8594;</div>
+      </div>
     </div>
   `;
+
   const view = document.getElementById('view-product');
   view.innerHTML = html;
   document.getElementById('view-home').classList.remove('active');
   view.classList.add('active');
   window.scrollTo(0,0);
+
+  // Init swipe para galeria mobile
+  initGallerySwipe();
 }
 
-function switchImage(url, el){
-  document.getElementById('detailMainImg').style.backgroundImage = `url('${url}')`;
-  document.querySelectorAll('.detail-thumb').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
+// ===== GALLERY CONTROLS =====
+let currentSlide = 0;
+
+function galleryGoTo(idx){
+  const slides = document.querySelectorAll('.gallery-slide');
+  const dots = document.querySelectorAll('.gallery-dot');
+  if(!slides.length) return;
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide = (idx + slides.length) % slides.length;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+}
+
+function galleryNext(){
+  const slides = document.querySelectorAll('.gallery-slide');
+  galleryGoTo(currentSlide + 1);
+}
+function galleryPrev(){
+  const slides = document.querySelectorAll('.gallery-slide');
+  galleryGoTo(currentSlide - 1);
+}
+
+function initGallerySwipe(){
+  currentSlide = 0;
+  const container = document.getElementById('gallerySlides');
+  if(!container) return;
+  let startX = 0;
+  container.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+  container.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if(Math.abs(dx) > 40) dx < 0 ? galleryNext() : galleryPrev();
+  }, {passive:true});
+}
+
+// ===== CAROUSEL CONTROLS =====
+function carouselNext(){
+  const c = document.getElementById('relatedCarousel');
+  if(c) c.scrollBy({left: c.offsetWidth * 0.8, behavior:'smooth'});
+}
+function carouselPrev(){
+  const c = document.getElementById('relatedCarousel');
+  if(c) c.scrollBy({left: -c.offsetWidth * 0.8, behavior:'smooth'});
 }
 
 function openContactForProduct(name){
